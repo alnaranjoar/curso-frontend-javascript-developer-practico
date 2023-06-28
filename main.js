@@ -65,60 +65,60 @@ productList.push({
 })
 
 
-      function renderProducts(array) {
-        for(product of array) {
+function renderProducts(array) {
+for(product of array) {
 
-            const productCard = `
-            <div class="product-card">
-                <img src="${product.image}" alt="">
-                <div class="product-info">
-                    <div>
-                        <p>$${product.price}</p>
-                        <p>${product.name}</p>
-                    </div>
-                    <figure>
-                        <img src="./icons/bt_add_to_cart.svg" alt="">
-                    </figure>
-                </div>
+    const productCard = `
+    <div class="product-card">
+        <img src="${product.image}" alt="">
+        <div class="product-info">
+            <div>
+                <p>$${product.price}</p>
+                <p>${product.name}</p>
             </div>
-            `
-            cardsContainer.innerHTML += productCard
-        
-            /*const productCard = document.createElement('div')
-            productCard.classList.add('product-card')
-        
-            const productImg = document.createElement('img')
-            productImg.setAttribute('src', product.image)
-        
-            const productInfo = document.createElement('div')
-            productInfo.classList.add('product-info')
-        
-            const productInfoDiv = document.createElement('div')
-        
-            const productPrice = document.createElement('p')
-            productPrice.innerHTML = '$' + product.price
-            const productName = document.createElement('p')
-            productName.innerHTML = product.name
-        
-            productInfoDiv.appendChild(productPrice)
-            productInfoDiv.appendChild(productName)
-        
-            const productInfoFigure = document.createElement('figure')
-            const addToCartImg = document.createElement('img')
-            addToCartImg.setAttribute('src', './icons/bt_add_to_cart.svg')
-        
-            productInfoFigure.appendChild(addToCartImg)
-        
-            productInfo.appendChild(productInfoDiv)
-            productInfo.appendChild(productInfoFigure)
-        
-            productCard.appendChild(productImg)
-            productCard.appendChild(productInfo)
-        
-            cardsContainer.appendChild(productCard)
-            */
-        }
-      }
+            <figure>
+                <img src="./icons/bt_add_to_cart.svg" alt="">
+            </figure>
+        </div>
+    </div>
+    `
+    cardsContainer.innerHTML += productCard
+
+    /*const productCard = document.createElement('div')
+    productCard.classList.add('product-card')
+
+    const productImg = document.createElement('img')
+    productImg.setAttribute('src', product.image)
+
+    const productInfo = document.createElement('div')
+    productInfo.classList.add('product-info')
+
+    const productInfoDiv = document.createElement('div')
+
+    const productPrice = document.createElement('p')
+    productPrice.innerHTML = '$' + product.price
+    const productName = document.createElement('p')
+    productName.innerHTML = product.name
+
+    productInfoDiv.appendChild(productPrice)
+    productInfoDiv.appendChild(productName)
+
+    const productInfoFigure = document.createElement('figure')
+    const addToCartImg = document.createElement('img')
+    addToCartImg.setAttribute('src', './icons/bt_add_to_cart.svg')
+
+    productInfoFigure.appendChild(addToCartImg)
+
+    productInfo.appendChild(productInfoDiv)
+    productInfo.appendChild(productInfoFigure)
+
+    productCard.appendChild(productImg)
+    productCard.appendChild(productInfo)
+
+    cardsContainer.appendChild(productCard)
+    */
+}
+}
 
 renderProducts(productList)
 
