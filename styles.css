@@ -290,6 +290,7 @@
   border-radius: 20px;
   object-fit: cover;
   border: 1px solid var(--text-input-field);
+  cursor: pointer;
 }
 .product-card .product-info {
   display: flex;
