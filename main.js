@@ -9,8 +9,13 @@ const mobileMenu = document.querySelector('.mobile-menu')
 const desktopShopingCartImg = document.querySelector('.navbar-shopping-cart')
 const desktopShoppingCart = document.querySelector('.shopping-cart-container')
 
+//product detail aside definitions
 const productDetailContainer = document.querySelector('.product-detail')
 const productDetailCloseIcon = document.querySelector('.product-detail-close')
+let productDetailImage = document.querySelector('.product-detail-img')
+let productDetailPrice = document.querySelector('.product-detail-price')
+let productDetailName = document.querySelector('.product-detail-name')
+let productDetailDescription = document.querySelector('.product-detail-description')
 
 //addEventListener
 navEmail.addEventListener('click', toggleDesktopMenu)
@@ -63,7 +68,26 @@ function toggleShoppingCart() {
     }
 }
 
+ function changeProductDetailAsideInfo(productName) {
+
+     console.log(productName)
+
+     productList.forEach(product => {
+         if(productName == product.name) {
+             productDetailImage.setAttribute('src', product.image)
+             productDetailPrice.innerHTML = '$' + product.price
+             productDetailName.innerHTML = product.name
+             productDetailDescription.innerHTML = product.description
+         } else {
+             return
+         }
+     })
+
+     openProductDetailAside()
+ }
+
 function openProductDetailAside() {
+
     productDetailContainer.classList.remove('inactive')
 
     if(!desktopShoppingCart.classList.contains('inactive')) {
@@ -88,44 +112,49 @@ productList.push({
     name: 'Bike',
     price: 120,
     image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.',
 })
 productList.push({
     name: 'Lights',
     price: 10,
     image: 'https://contents.mediadecathlon.com/p1898422/k$641c8d34be572289d162705f9090300d/luces-para-bicicleta-led-st-920-delantero-slash-trasero-usb.jpg?format=auto&quality=40&f=452x452',
+    description: 'This lights help you see at night and also cars and motorcycles can always see you'
 })
 productList.push({
     name: 'Helmet',
     price: 40,
     image: 'https://cdn.shopify.com/s/files/1/0604/4637/6123/products/659436676916.jpg?v=1640799457',
+    description: 'Protect your head from damage with a high quality helmet'
 })
 
 
 function renderProducts(array) {
 for(product of array) {
 
-    // const productCard = `
-    // <div class="product-card">
-    //     <img class="product-card-image" src="${product.image}" alt="" onclick="openProductDetailAside">
-    //     <div class="product-info">
-    //         <div>
-    //             <p>$${product.price}</p>
-    //             <p>${product.name}</p>
-    //         </div>
-    //         <figure>
-    //             <img src="./icons/bt_add_to_cart.svg" alt="">
-    //         </figure>
-    //     </div>
-    // </div>
-    // `
-    // cardsContainer.innerHTML += productCard
+     const productCard = `
+     <div class="product-card">
+         <img class="product-card-image" src="${product.image}" alt="" onclick="changeProductDetailAsideInfo('${product.name}')">
+         <div class="product-info">
+             <div>
+                 <p>$${product.price}</p>
+                 <p>${product.name}</p>
+             </div>
+             <figure>
+                 <img src="./icons/bt_add_to_cart.svg" alt="">
+             </figure>
+         </div>
+     </div>
+     `
+     cardsContainer.innerHTML += productCard
 
+     /*
     const productCard = document.createElement('div')
     productCard.classList.add('product-card')
 
     const productImg = document.createElement('img')
     productImg.setAttribute('src', product.image)
-    productImg.addEventListener('click', openProductDetailAside)
+    productImg.setAttribute('id', product.name)
+    productImg.addEventListener('click', function(){changeProductDetailAsideInfo(product.name)})
 
     const productInfo = document.createElement('div')
     productInfo.classList.add('product-info')
@@ -153,6 +182,7 @@ for(product of array) {
     productCard.appendChild(productInfo)
 
     cardsContainer.appendChild(productCard)
+    */
 }
 }
 
