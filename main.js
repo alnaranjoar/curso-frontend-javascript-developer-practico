@@ -24,6 +24,25 @@ desktopShopingCartImg.addEventListener('click', toggleShoppingCart)
 productDetailCloseIcon.addEventListener('click', closeProductDetailAside)
 
 
+class Product {
+    constructor(name,price,image,description){
+        this.name = name
+        this.price = price
+        this.image = image
+        this.description = description
+    }
+}
+
+let bike = new Product('Bike', 120, 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.')
+
+let light = new Product('Light', 10, 'https://contents.mediadecathlon.com/p1898422/k$641c8d34be572289d162705f9090300d/luces-para-bicicleta-led-st-920-delantero-slash-trasero-usb.jpg?format=auto&quality=40&f=452x452', 'This lights help you see at night and also cars and motorcycles can always see you')
+
+let helmet = new Product('Helmet', 40, 'https://cdn.shopify.com/s/files/1/0604/4637/6123/products/659436676916.jpg?v=1640799457', 'Protect your head from damage with a high quality helmet')
+
+let products = []
+
+products.push(bike, light, helmet)
+
 //Desktop menu
 function toggleDesktopMenu() {
     desktopMenu.classList.toggle('inactive') //toggle activa o inactiva dependiendo del estado. 
@@ -70,9 +89,7 @@ function toggleShoppingCart() {
 
  function changeProductDetailAsideInfo(productName) {
 
-     console.log(productName)
-
-     productList.forEach(product => {
+     products.forEach(product => {
          if(productName == product.name) {
              productDetailImage.setAttribute('src', product.image)
              productDetailPrice.innerHTML = '$' + product.price
@@ -107,84 +124,25 @@ function closeProductDetailAside() {
     productDetailContainer.classList.add('inactive')
 }
 
-const productList = []
-productList.push({
-    name: 'Bike',
-    price: 120,
-    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    description: 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.',
-})
-productList.push({
-    name: 'Lights',
-    price: 10,
-    image: 'https://contents.mediadecathlon.com/p1898422/k$641c8d34be572289d162705f9090300d/luces-para-bicicleta-led-st-920-delantero-slash-trasero-usb.jpg?format=auto&quality=40&f=452x452',
-    description: 'This lights help you see at night and also cars and motorcycles can always see you'
-})
-productList.push({
-    name: 'Helmet',
-    price: 40,
-    image: 'https://cdn.shopify.com/s/files/1/0604/4637/6123/products/659436676916.jpg?v=1640799457',
-    description: 'Protect your head from damage with a high quality helmet'
-})
-
-
 function renderProducts(array) {
-for(product of array) {
-
-     const productCard = `
-     <div class="product-card">
-         <img class="product-card-image" src="${product.image}" alt="" onclick="changeProductDetailAsideInfo('${product.name}')">
-         <div class="product-info">
-             <div>
-                 <p>$${product.price}</p>
-                 <p>${product.name}</p>
-             </div>
-             <figure>
-                 <img src="./icons/bt_add_to_cart.svg" alt="">
-             </figure>
-         </div>
-     </div>
-     `
-     cardsContainer.innerHTML += productCard
-
-     /*
-    const productCard = document.createElement('div')
-    productCard.classList.add('product-card')
-
-    const productImg = document.createElement('img')
-    productImg.setAttribute('src', product.image)
-    productImg.setAttribute('id', product.name)
-    productImg.addEventListener('click', function(){changeProductDetailAsideInfo(product.name)})
-
-    const productInfo = document.createElement('div')
-    productInfo.classList.add('product-info')
-
-    const productInfoDiv = document.createElement('div')
-
-    const productPrice = document.createElement('p')
-    productPrice.innerHTML = '$' + product.price
-    const productName = document.createElement('p')
-    productName.innerHTML = product.name
-
-    productInfoDiv.appendChild(productPrice)
-    productInfoDiv.appendChild(productName)
-
-    const productInfoFigure = document.createElement('figure')
-    const addToCartImg = document.createElement('img')
-    addToCartImg.setAttribute('src', './icons/bt_add_to_cart.svg')
-
-    productInfoFigure.appendChild(addToCartImg)
-
-    productInfo.appendChild(productInfoDiv)
-    productInfo.appendChild(productInfoFigure)
-
-    productCard.appendChild(productImg)
-    productCard.appendChild(productInfo)
-
-    cardsContainer.appendChild(productCard)
-    */
-}
+    for(product of array) {
+        const productCard = `
+        <div class="product-card">
+            <img class="product-card-image" src="${product.image}" alt="" onclick="changeProductDetailAsideInfo('${product.name}')">
+            <div class="product-info">
+                <div>
+                    <p>$${product.price}</p>
+                    <p>${product.name}</p>
+                </div>
+                <figure>
+                    <img src="./icons/bt_add_to_cart.svg" alt="">
+                </figure>
+            </div>
+        </div>
+        `
+        cardsContainer.innerHTML += productCard
+    }
 }
 
-renderProducts(productList)
+renderProducts(products)
 
