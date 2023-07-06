@@ -68,6 +68,7 @@
     padding: 8px;
     border-radius: 8px;
     cursor: pointer;
+    user-select: none;
   }
 
   .navbar-left ul li a:hover,
@@ -121,7 +122,21 @@
     text-decoration: none;
     color: var(--black);
     font-weight: bold;
+    cursor: pointer;
+    user-select: none;
     /* margin-bottom: 24px; */
+  }
+
+  .mobile-menu a:hover {
+    color: var(--hospital-green)
+  }
+
+  .mobile-menu :first-child :first-child a {
+    cursor:auto;
+  }
+
+  .mobile-menu :first-child :first-child a:hover {
+    color: var(--black);
   }
 
   .mobile-menu ul {
