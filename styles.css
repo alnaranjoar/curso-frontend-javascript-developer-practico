@@ -34,6 +34,10 @@
     cursor: pointer;
   }
 
+  .a-logo {
+    display: flex;
+  }
+  
   .logo {
     width: 100px;
   }
@@ -63,6 +67,7 @@
     border: 1px solid var(--white);
     padding: 8px;
     border-radius: 8px;
+    cursor: pointer;
   }
 
   .navbar-left ul li a:hover,
