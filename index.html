@@ -42,10 +42,10 @@
     
         <ul>
           <li>
-            <a href="/">My orders</a>
+            <a href="./clase10.html">My orders</a>
           </li>
           <li>
-            <a href="/">My account</a>
+            <a href="./clase5.html">My account</a>
           </li>
         </ul>
     
@@ -92,7 +92,7 @@
         <li class="navbar-email">platzi@example.com</li>
         <li class="navbar-shopping-cart">
           <img src="./icons/icon_shopping_cart.svg" alt="shopping cart">
-          <div>2</div>
+          <div class="cart-item-counter inactive"></div>
         </li>
       </ul>
     </div>
@@ -100,11 +100,11 @@
     <div class="desktop-menu inactive">
         <ul>
           <li>
-            <a href="/" class="title">My orders</a>
+            <a href="./clase10.html" class="title">My orders</a>
           </li>
     
           <li>
-            <a href="/">My account</a>
+            <a href="./clase5.html">My account</a>
           </li>
     
           <li>
@@ -123,42 +123,24 @@
     </div>
 
     <div class="my-order-content">
-      
-      <div class="shopping-cart">
-        <figure>
-          <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="bike">
-        </figure>
-        <p>Bike</p>
-        <p>$30,00</p>
-        <img src="./icons/icon_close.png" alt="close">
+
+      <div class="no-item-msj">
+        <p>No items in the cart yet</p>
+      </div> 
+
+      <div class="my-order-items">
+
       </div>
 
-      <div class="shopping-cart">
-        <figure>
-          <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="bike">
-        </figure>
-        <p>Bike</p>
-        <p>$30,00</p>
-        <img src="./icons/icon_close.png" alt="close">
-      </div>
-
-      <div class="shopping-cart">
-        <figure>
-          <img src="https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="bike">
-        </figure>
-        <p>Bike</p>
-        <p>$30,00</p>
-        <img src="./icons/icon_close.png" alt="close">
-      </div>
-
-      <div class="order">
+      <div class="order inactive">
+        <p>Total</p>
         <p>
-          <span>Total</span>
+          <span class="article-count">6 articles</span>
+          <span class="article-sum">$560.00</span>
         </p>
-        <p>$560.00</p>
       </div>
 
-      <button class="primary-button">
+      <button class="primary-button inactive">
         Checkout
       </button>
     </div>
@@ -174,7 +156,7 @@
       <p class="product-detail-name"></p>
       <p class="product-detail-description"></p>
       <button class="primary-button add-to-cart-button">
-        <img src="./icons/bt_add_to_cart.svg" alt="add to cart">
+        <img class="add-to-cart-button-img" src="./icons/bt_add_to_cart.svg" alt="add to cart">
         Add to cart
       </button>
     </div>
