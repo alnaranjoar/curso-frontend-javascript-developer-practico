@@ -26,15 +26,17 @@ const mobileOthers = document.getElementById('mobile-menu-others')
 const addToCardButton = document.querySelector('.add-to-cart-button')
 
 let currentProduct
-let cartItemsCounter = 0
 let cartItemsSum = 0
 
 const orderItems = document.querySelector('.my-order-items')
 const orderSummary = document.querySelector('.order')
 const noItem = document.querySelector('.no-item-msj')
 
-const articleCount = document.querySelector('.article-count')
 const articleSum = document.querySelector('.article-sum')
+
+const cartNonEmpty = document.querySelector('.cart-item-counter')
+
+let removeFromCart
 
 //product detail aside definitions
 const productDetailContainer = document.querySelector('.product-detail')
@@ -79,19 +81,19 @@ class Product {
     }
 }
 
-let bike = new Product('Bike', 120, 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.', 'others',1)
+let bike = new Product('Bike', 120, 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', 'With its practical position, this bike also fulfills a decorative function, add your hall or workspace.', 'others',2)
 
-let light = new Product('Light', 10, 'https://contents.mediadecathlon.com/p1898422/k$641c8d34be572289d162705f9090300d/luces-para-bicicleta-led-st-920-delantero-slash-trasero-usb.jpg?format=auto&quality=40&f=452x452', 'This lights help you see at night and also cars and motorcycles can always see you','electronics',1)
+let light = new Product('Light', 10, 'https://contents.mediadecathlon.com/p1898422/k$641c8d34be572289d162705f9090300d/luces-para-bicicleta-led-st-920-delantero-slash-trasero-usb.jpg?format=auto&quality=40&f=452x452', 'This lights help you see at night and also cars and motorcycles can always see you','electronics',2)
 
-let helmet = new Product('Helmet', 40, 'https://cdn.shopify.com/s/files/1/0604/4637/6123/products/659436676916.jpg?v=1640799457', 'Protect your head from damage with a high quality helmet', 'others',1)
+let helmet = new Product('Helmet', 40, 'https://cdn.shopify.com/s/files/1/0604/4637/6123/products/659436676916.jpg?v=1640799457', 'Protect your head from damage with a high quality helmet', 'others',2)
 
-let womanTshirt = new Product('Woman T-shirt', 20, 'https://images.pexels.com/photos/1642228/pexels-photo-1642228.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Comfortable t-shirt for women', 'clothes',1)
+let womanTshirt = new Product('Woman T-shirt', 20, 'https://images.pexels.com/photos/1642228/pexels-photo-1642228.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Comfortable t-shirt for women', 'clothes',2)
 
-let hoodie = new Product('Hoodie', 40, 'https://images.pexels.com/photos/702350/pexels-photo-702350.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Incredible black Vans hoodie to look amazing', 'clothes',1)
+let hoodie = new Product('Hoodie', 40, 'https://images.pexels.com/photos/702350/pexels-photo-702350.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Incredible black Vans hoodie to look amazing', 'clothes',2)
 
-let duck = new Product('Bath Duck', 5, 'https://images.pexels.com/photos/5337590/pexels-photo-5337590.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Cute bath duck for your kids to play and have an amazing bath', 'toys',1)
+let duck = new Product('Bath Duck', 5, 'https://images.pexels.com/photos/5337590/pexels-photo-5337590.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Cute bath duck for your kids to play and have an amazing bath', 'toys',2)
 
-let sofa = new Product('Leather Sofa', 700, 'https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Beautiful and comfortable leather sofa for your living room' , 'furniture',1)
+let sofa = new Product('Leather Sofa', 700, 'https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Beautiful and comfortable leather sofa for your living room' , 'furniture',2)
 
 let products = []
 products.push(bike, light, helmet, womanTshirt, hoodie, duck, sofa)
@@ -216,35 +218,48 @@ function addToCart() {
 
     const addItem = 
     `
-    <div class="shopping-cart">
+    <div class="shopping-cart" id = "${currentProduct.name}">
         <figure>
             <img src="${currentProduct.image}" alt="${currentProduct.name}">
         </figure>
         <p>${currentProduct.name}</p>
         <p>$${currentProduct.price}</p>
-        <img src="./icons/icon_close.png" alt="close">
+        <img class="remove-from-cart" src="./icons/icon_close.png" alt="close" style="cursor: pointer">
     </div>
     `
     orderItems.innerHTML += addItem
-    cartItemsCounter ++
+
     cartItemsSum = cartItemsSum + currentProduct.price
 
-    let articleS
-    
-    if(cartItemsCounter = 1) {
-        articleS = ' article'
-    } else {
-        articleS = ' articles'
-    }
-
-    articleCount.innerHTML = cartItemsCounter + articleS
     articleSum.innerHTML = '$' + cartItemsSum
 
-    if(cartItemsCounter > 0) {
+    removeFromCart = document.querySelectorAll('.remove-from-cart')
+    
+    removeFromCart.forEach((closeicon) => {
+        closeicon.addEventListener('click', function(){testear(closeicon)})
+    })
+
+    if(cartItemsSum > 0) {
         noItem.classList.add('inactive')
         orderSummary.classList.remove('inactive')
+        cartNonEmpty.classList.remove('inactive')
     }
 
 }
+
 renderProducts(products)
 
+function testear(icon) {
+    let son = icon.parentNode
+    actualPrice = Number(son.children[2].innerText.slice(1))
+    cartItemsSum = cartItemsSum - actualPrice
+    articleSum.innerHTML = '$' + cartItemsSum
+    let father = son.parentNode
+    father.removeChild(son)
+
+    if(cartItemsSum == 0) {
+        noItem.classList.remove('inactive')
+        orderSummary.classList.add('inactive')
+        cartNonEmpty.classList.add('inactive')
+    }
+}
