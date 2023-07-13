@@ -23,7 +23,7 @@ const mobileFurnitures = document.getElementById('mobile-menu-furnitures')
 const mobileToys = document.getElementById('mobile-menu-toys')
 const mobileOthers = document.getElementById('mobile-menu-others')
 
-const addToCardButton = document.querySelector('.add-to-cart-button')
+const addToCartButton = document.querySelector('.add-to-cart-button')
 
 let currentProduct
 let cartItemsSum = 0
@@ -68,7 +68,7 @@ mobileFurnitures.addEventListener('click',function(){productsFilter(furniture)})
 mobileToys.addEventListener('click',function(){productsFilter(toys)})
 mobileOthers.addEventListener('click',function(){productsFilter(others)})
 
-addToCardButton.addEventListener('click', addToCart)
+addToCartButton.addEventListener('click', addToCart)
 
 class Product {
     constructor(name,price,image,description,type,sum){
@@ -197,7 +197,7 @@ function renderProducts(array) {
                     <p>${product.name}</p>
                 </div>
                 <figure>
-                    <img src="./icons/bt_add_to_cart.svg" alt="">
+                    <img src="./icons/bt_add_to_cart.svg" alt="" onclick="updateCurrentProduct('${product.name}')">
                 </figure>
             </div>
         </div>
@@ -236,7 +236,7 @@ function addToCart() {
     removeFromCart = document.querySelectorAll('.remove-from-cart')
     
     removeFromCart.forEach((closeicon) => {
-        closeicon.addEventListener('click', function(){testear(closeicon)})
+        closeicon.addEventListener('click', function(){removeItemsFromCart(closeicon)})
     })
 
     if(cartItemsSum > 0) {
@@ -249,7 +249,7 @@ function addToCart() {
 
 renderProducts(products)
 
-function testear(icon) {
+function removeItemsFromCart(icon) {
     let son = icon.parentNode
     actualPrice = Number(son.children[2].innerText.slice(1))
     cartItemsSum = cartItemsSum - actualPrice
@@ -262,4 +262,17 @@ function testear(icon) {
         orderSummary.classList.add('inactive')
         cartNonEmpty.classList.add('inactive')
     }
+}
+
+function updateCurrentProduct(productName) {
+    
+    products.forEach((product) => {
+        if(productName == product.name) {
+            currentProduct = product
+        } else {
+            return
+        }
+    })
+
+    addToCart()
 }
