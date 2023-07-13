@@ -25,12 +25,15 @@ const mobileOthers = document.getElementById('mobile-menu-others')
 
 const addToCartButton = document.querySelector('.add-to-cart-button')
 
+const returnFromCart = document.getElementById('return-from-cart')
+
 let currentProduct
 let cartItemsSum = 0
 
 const orderItems = document.querySelector('.my-order-items')
 const orderSummary = document.querySelector('.order')
 const noItem = document.querySelector('.no-item-msj')
+const cartCheckOutBtn = document.querySelector('.checkout-button')
 
 const articleSum = document.querySelector('.article-sum')
 
@@ -69,6 +72,8 @@ mobileToys.addEventListener('click',function(){productsFilter(toys)})
 mobileOthers.addEventListener('click',function(){productsFilter(others)})
 
 addToCartButton.addEventListener('click', addToCart)
+
+returnFromCart.addEventListener('click', toggleShoppingCart)
 
 class Product {
     constructor(name,price,image,description,type,sum){
@@ -243,6 +248,7 @@ function addToCart() {
         noItem.classList.add('inactive')
         orderSummary.classList.remove('inactive')
         cartNonEmpty.classList.remove('inactive')
+        cartCheckOutBtn.classList.remove('inactive')
     }
 
 }
@@ -261,6 +267,7 @@ function removeItemsFromCart(icon) {
         noItem.classList.remove('inactive')
         orderSummary.classList.add('inactive')
         cartNonEmpty.classList.add('inactive')
+        cartCheckOutBtn.classList.add('inactive')
     }
 }
 

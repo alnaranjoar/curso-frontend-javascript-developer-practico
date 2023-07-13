@@ -219,6 +219,12 @@
     position: absolute;
     right: 0;
   }
+
+  #return-from-cart {
+    cursor: pointer;
+  }
+  
+
   .title-container {
     display: flex;
   }
